@@ -1,7 +1,8 @@
 from django.conf.urls import url
 
-from .views import EmailObtainAuthTokenView
+from rest_framework_jwt.views import obtain_jwt_token
 
 urlpatterns = [
-    url(r'auth', EmailObtainAuthTokenView.as_view(), name='auth')
+    url(r'^obtain-token', obtain_jwt_token),
 ]
+
