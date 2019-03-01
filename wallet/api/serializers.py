@@ -6,36 +6,29 @@ from ..models import Transaction, Wallet
 class ListTransactionsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
-        fields = ('name', 'value', 'type_transaction')
-        read_only_fields = ("wallet", )
+        fields = ('name', 'value')
+
+    def to_representation(self, obj):
+        return {
+            "name": obj.name, 
+            "value": obj.presentation_value, 
+        }
+
+
+class CreateTransactionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Transaction
+        fields = ('name', 'type_transaction', 'value')
 
     def validate(self, data):
-        from constants import OUT, IN  
-        type_transaction = data.get('type_transaction', None)
-        if type_transaction not in [OUT, IN]:
-            raise serializers.ValidationError("Invalid type transaction !")
+        # write some logic that don't be inside model object validation rules 
+        return data
 
     def create(self, validated_data):
-        request = self.context.get('request')
-        wallet = request.user.wallet
-        transaction = self.Meta.model.objects.create(**validated_data, wallet=wallet)   
+        try:
+            request = self.context.get('request')
+            wallet = request.user.wallet
+            transaction = self.Meta.model.objects.create(**validated_data, wallet=wallet)   
+        except Exception as e:
+            raise serializers.ValidationError(e)
         return transaction
-
-
-# class CreateTransactionSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Transaction
-#         fields = ('name', 'type_transaction', 'value')
-
-#     def validate(self, data):
-#         from constants import OUT, IN  
-#         type_transaction = data.get('type_transaction', None)
-#         if type_transaction not in [OUT, IN]:
-#             raise serializers.ValidationError("Invalid type transaction !")
-            
-
-#     def create(self, validated_data):
-#         request = self.context.get('request')
-#         wallet = request.user.wallet
-#         transaction = self.Meta.model.objects.create(**validated_data, wallet=wallet)   
-#         return transaction
