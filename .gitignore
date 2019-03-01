@@ -1,4 +1,6 @@
-i*.py[co]
+db.sqlite3
+.vscode
+*.py[co]
 .DS_Store
 .idea
 *.swp*
@@ -7,3 +9,5 @@ i*.py[co]
 *.log
 .env
 tmp
+__pycache__
+
