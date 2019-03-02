@@ -1,2 +1,7 @@
 OUT_TRANSACTION = 0
 IN_TRANSACTION = 1
+LIST_CURRENCY_TRANSACTIONS = {
+    'DOLAR':'U$', 
+    'REAL':'R$', 
+    'EURO': '€'
+}

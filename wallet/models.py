@@ -1,11 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.core.exceptions import ValidationError
+
 from decimal import Decimal
 
-from .constants import IN_TRANSACTION, OUT_TRANSACTION
-
+from .constants import *
+from .utils import make_currency_tuple
 
 # Create your models here.
 class Wallet(models.Model):
@@ -17,7 +18,11 @@ class Transaction(models.Model):
         (OUT_TRANSACTION, 'OUT'),  
         (IN_TRANSACTION, 'IN'),
     )
+    CURRENCY_CHOICES = make_currency_tuple()
+    DEFAULT_TRANSACTION_CURRENCY = 'R$'
+
     name = models.CharField(max_length=100)
+    currency = models.CharField(max_length=2, choices=CURRENCY_CHOICES, default=DEFAULT_TRANSACTION_CURRENCY)
     value = models.DecimalField(decimal_places=2, max_digits=12)
     type_transaction = models.SmallIntegerField(choices=TYPES_TRANSACTION)
     wallet = models.ForeignKey(Wallet, related_name='transactions', on_delete=models.CASCADE)
@@ -25,7 +30,7 @@ class Transaction(models.Model):
 
     @property
     def presentation_value(self):
-        value = ' R${:.2f}'
+        value = ' ' + self.currency + '{:.2f}'
         if self.type_transaction == IN_TRANSACTION:
             value = '+' + value.format(abs(self.value))
         elif self.type_transaction == OUT_TRANSACTION:
@@ -48,10 +53,9 @@ class Transaction(models.Model):
             raise ValidationError('set value must be positive')
 
     def save(self, *args, **kwargs):
-        if not self.pk:
-            self._check_signal_value()
-            self._check_type_transaction()
-            self._set_value_by_type_transaction()
+        self._check_signal_value()
+        self._check_type_transaction()
+        self._set_value_by_type_transaction()
         super().save(*args, **kwargs)
     
     def __str__(self):
