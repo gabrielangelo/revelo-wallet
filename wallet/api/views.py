@@ -1,4 +1,3 @@
-from django_filters.rest_framework import DjangoFilterBackend
 from django.core.exceptions import SuspiciousOperation
 
 from rest_framework.viewsets import GenericViewSet
@@ -9,6 +8,7 @@ from rest_framework import status
 from rest_framework.response import Response
 
 from .utils import format_error_payload, format_success_payload
+from django_filters.rest_framework import DjangoFilterBackend
 
 from ..models import Transaction
 from .serializers import ListTransactionsSerializer, CreateTransactionSerializer

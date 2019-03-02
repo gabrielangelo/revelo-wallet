@@ -21,14 +21,13 @@ class CreateTransactionSerializer(serializers.ModelSerializer):
         fields = ('name', 'type_transaction', 'value')
 
     def validate(self, data):
-        # write some logic that don't be inside model object validation rules 
+        value = data.get('value', None)
+        if value < 0:
+            raise serializers.ValidationError('value must be positive !')
         return data
 
     def create(self, validated_data):
-        try:
-            request = self.context.get('request')
-            wallet = request.user.wallet
-            transaction = self.Meta.model.objects.create(**validated_data, wallet=wallet)   
-        except Exception as e:
-            raise serializers.ValidationError(e)
+        request = self.context.get('request')
+        wallet = request.user.wallet
+        transaction = self.Meta.model.objects.create(**validated_data, wallet=wallet)
         return transaction
