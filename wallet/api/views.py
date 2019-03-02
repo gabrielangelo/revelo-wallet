@@ -7,17 +7,16 @@ from rest_framework.filters import OrderingFilter
 from rest_framework import status
 from rest_framework.response import Response
 
-from .utils import format_error_payload, format_success_payload
 from django_filters.rest_framework import DjangoFilterBackend
 
 from ..models import Transaction
 from .serializers import ListTransactionsSerializer, CreateTransactionSerializer
+from ..utils import format_error_payload, format_success_payload
 
 
 class ListCreateViewset(GenericViewSet,
     mixins.CreateModelMixin, 
-    mixins.ListModelMixin,  
-    mixins.RetrieveModelMixin):
+    mixins.ListModelMixin):
     list_serializer = None
     create_serializer = None
     
