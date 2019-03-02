@@ -48,6 +48,9 @@ class Transaction(models.Model):
         if self.type_transaction not in [OUT_TRANSACTION, IN_TRANSACTION]:
             raise ValidationError('invalid value to type_transaction, must be 0 or 1 !')
     
+    def _set_currency_cipher_to_upper(self):
+        self.currency = self.currency.upper()
+    
     def _check_signal_value(self):
         if self.value < 0:
             raise ValidationError('set value must be positive')
@@ -56,6 +59,7 @@ class Transaction(models.Model):
         self._check_signal_value()
         self._check_type_transaction()
         self._set_value_by_type_transaction()
+        self._set_currency_cipher_to_upper()
         super().save(*args, **kwargs)
     
     def __str__(self):
