@@ -68,6 +68,16 @@ class TransactionTest(TestCase):
                     value=-10.00
                 )
 
+        def test_transaction_many_to_one_relationship(self):
+            wallet = mommy.make(Wallet)
+            transactions = [
+                mommy.make(
+                    Transaction,
+                    wallet=wallet
+                ) for i in range(0, 10)
+            ]
+            self.assertTrue(list(wallet.transactions.all()) == transactions)
+
 
 class WalletTest(TestCase):
     def test_wallet_creation_during_user_creation_signal(self):
