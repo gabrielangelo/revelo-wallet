@@ -26,7 +26,7 @@ SECRET_KEY = '-eqd^jb#0$bk7$sa4#vcmopxok%*t^v95+ql_9y-f4xi5!dt5b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -42,9 +42,8 @@ INSTALLED_APPS = [
 
 THIRD_APPS = [
     'rest_framework',
-     'rest_framework.authtoken',
+    'rest_framework.authtoken',
     'django_extensions'
-    ''
 ]
 
 INTERNAL_APPS = [
@@ -65,21 +64,21 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'revelowallet.urls'
 
-# TEMPLATES = [
-#     {
-#         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-#         'DIRS': [],
-#         'APP_DIRS': True,
-#         'OPTIONS': {
-#             'context_processors': [
-#                 'django.template.context_processors.debug',
-#                 'django.template.context_processors.request',
-#                 'django.contrib.auth.context_processors.auth',
-#                 'django.contrib.messages.context_processors.messages',
-#             ],
-#         },
-#     },
-# ]
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
 
 WSGI_APPLICATION = 'revelowallet.wsgi.application'
 
@@ -89,10 +88,16 @@ WSGI_APPLICATION = 'revelowallet.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'celero_local',
+        'USER': 'admin_local',
+        'PASSWORD': 'local_test',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
+
+
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
