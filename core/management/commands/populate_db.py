@@ -41,7 +41,7 @@ class Command(BaseCommand):
     
     def _initial_handle(self): 
         self.create_transactions(self.create_user())
-        self._print_green()
+        self._print_green('Ok')
         
     def handle(self, **options):
         self._initial_handle()
