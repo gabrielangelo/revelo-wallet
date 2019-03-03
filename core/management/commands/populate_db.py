@@ -13,6 +13,10 @@ class Command(BaseCommand):
         'is_superuser':True
     }
     
+    def _print_green(self, name):
+        """grenn letter"""
+        print("\033[92m {}\033[00m".format(name))
+
     def create_user(self):
         user, created  = User.objects.get_or_create(**self.params_user)
         if created:
@@ -35,9 +39,10 @@ class Command(BaseCommand):
         ]
         Transaction.objects.bulk_create(user_transactions)
     
-
     def _initial_handle(self): 
         self.create_transactions(self.create_user())
-
+        self._print_green()
+        
     def handle(self, **options):
         self._initial_handle()
+        
