@@ -40,6 +40,7 @@ showmigrations:
 	$(MANAGE) showmigrations
 
 setup:
+	@pip install -r requirements/prod.txt
 	$(MANAGE) migrate
 	$(MANAGE_TEST)
 	$(MANAGE) populate_db
@@ -55,4 +56,7 @@ install_local_deps:
 
 install_prod_deps:
 	@pip install requirements/prod.txt
+
+help:
+	grep '^[^#[:space:]].*:' Makefile | awk -F ":" '{print $$1}'
 
