@@ -49,7 +49,7 @@ THIRD_APPS = [
 ]
 
 INTERNAL_APPS = [
-    'wallet',
+    'transactions',
     'core',
 ]
 

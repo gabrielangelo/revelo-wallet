@@ -2,7 +2,7 @@ from django.apps import AppConfig
 
 
 class WalletConfig(AppConfig):
-    name = 'wallet'
+    name = 'transactions'
 
     def ready(self):
-        import wallet.signals
+        import transactions.signals

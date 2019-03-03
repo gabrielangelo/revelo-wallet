@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 
 from django.contrib.auth.models import User
 
-from wallet.models import Transaction
+from transactions.models import Transaction
 
 
 class Command(BaseCommand):
