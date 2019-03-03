@@ -26,15 +26,21 @@
 ```
 $ virtualenv <env_name>
 $ source <env_name>/bin/activate
-```
 
-3. Installation:
+
+```
+3. Set PROJECT var in Makefile to your virtualenv name (<env_name> above), after this, set VENV var to directory name of your virtualenv:
+```
+PROJECT := <env_name>
+VENV := ~/.virtualenvs 
+```
+4. Installation:
 
 ```
 $ make setup
 ```
 
-4. Start the server:
+5. Start the server:
 
 ```
 $ make run
