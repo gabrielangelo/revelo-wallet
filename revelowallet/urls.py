@@ -18,8 +18,6 @@ from django.urls import path, include
 
 from routers import router_v1
 
-# router_v1.urls += url_auth 
-
 urlpatterns = [
     path('admin/', admin.site.urls),  
     path('api/v1/', include('auth.api.urls'))
