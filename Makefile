@@ -42,6 +42,10 @@ showmigrations:
 setup:
 	$(MANAGE) migrate
 	$(MANAGE_TEST)
+	$(MANAGE) populate_db
+
+pop_db:
+	$(MANAGE) populate_db
 
 clean:
 	@find . -name "*.pyc" -delete
