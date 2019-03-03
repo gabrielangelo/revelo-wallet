@@ -42,10 +42,16 @@ INSTALLED_APPS = [
 
 THIRD_APPS = [
     'rest_framework',
+     'rest_framework.authtoken',
     'django_extensions'
+    ''
 ]
 
-INSTALLED_APPS += THIRD_APPS
+INTERNAL_APPS = [
+    'wallet',
+]
+
+INSTALLED_APPS += THIRD_APPS + INTERNAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -94,9 +100,9 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ),
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
 }
 
 # Password validation
@@ -141,7 +147,10 @@ STATIC_URL = '/static/'
 AUTHENTICATION_BACKENDS = (
     'auth.backends.EmailBackend',
 )
+<<<<<<< HEAD
 
 JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=3600)
 }
+=======
+>>>>>>> wallet
