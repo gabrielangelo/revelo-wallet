@@ -37,6 +37,20 @@ class ListCreateViewset(GenericViewSet,
 
 
 class TransactionsViewSet(ListCreateViewset):
+    """This endpoint list and create user transactions, below the list params endpoins:\n
+            name (string) : filter transaction by name
+            type_transaction (integer): filter by type_transaction (can be 0 to spent transactions or 1 to earnings transactions)\n
+            ordering: sort the list transaction by some field, the accepeted fields are list below:
+                value
+                name
+                created_at
+
+
+        List below the fields to create transactions:\n
+            value (integer) -> only accpets positive decimal values with 2 places
+            name (string)
+            type_transaction -> 0 to spent or 1 to eranings
+    """ 
     permission_classes = (IsAuthenticated, )
     filter_backends = (DjangoFilterBackend, OrderingFilter)
     filter_fields = (u'name', u'type_transaction')
