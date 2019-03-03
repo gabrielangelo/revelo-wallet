@@ -25,7 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     
     path('api/v1/', include(router_v1.urls)),
-
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    
     url('docs/', schema_view), 
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
