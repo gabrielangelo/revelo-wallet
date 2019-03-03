@@ -3,7 +3,6 @@ import environ
 
 from .local import *
 
-DEBUG=False
 env = environ.Env()
 env_file = join(dirname(__file__), '.env')
 if exists(env_file):
