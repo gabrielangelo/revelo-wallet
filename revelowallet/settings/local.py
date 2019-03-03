@@ -50,6 +50,7 @@ THIRD_APPS = [
 
 INTERNAL_APPS = [
     'wallet',
+    'core',
 ]
 
 INSTALLED_APPS += THIRD_APPS + INTERNAL_APPS
@@ -98,8 +99,6 @@ DATABASES = {
         'PORT': '',
     }
 }
-
-
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
