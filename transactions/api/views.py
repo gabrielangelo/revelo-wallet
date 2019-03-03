@@ -50,6 +50,7 @@ class TransactionsViewSet(ListCreateViewset):
             value (integer) -> only accpets positive decimal values with 2 places
             name (string)
             type_transaction -> 0 to spent or 1 to eranings
+            currenncy (optional) -> can be 'U$', 'R$' (default), or '€'
     """ 
     permission_classes = (IsAuthenticated, )
     filter_backends = (DjangoFilterBackend, OrderingFilter)
