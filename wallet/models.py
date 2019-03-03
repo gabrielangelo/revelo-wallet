@@ -76,7 +76,7 @@ class Transaction(models.Model):
         self._validate()
         super().save(*args, **kwargs)
 
-    def __unicode__(self):
+    def __repr__(self):
         value_to_presentation = u'R${:.2f}'.format(abs(self.value))
         return u'{0} - {1}'.format(self.name, value_to_presentation)
 
