@@ -45,7 +45,7 @@ The site will be available on <http://127.0.0.1:8000>.
 
 ## REST API Docs
 
-REST API docs can be found in <http://127.0.0.1:8000/api/v1/docs/>.
+REST API docs can be found in <http://localhost:8000/api/v1/docs/>.
 
 
 ## Deploy
