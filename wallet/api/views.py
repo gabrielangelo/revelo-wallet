@@ -1,4 +1,5 @@
 from django.core.exceptions import SuspiciousOperation
+from django.utils.translation import gettext as _
 
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins
@@ -11,7 +12,6 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 from ..models import Transaction
 from .serializers import ListTransactionsSerializer, CreateTransactionSerializer
-from ..utils import format_error_payload, format_success_payload
 
 
 class ListCreateViewset(GenericViewSet,
@@ -22,8 +22,8 @@ class ListCreateViewset(GenericViewSet,
     
     def make_serializers_list_by_http_verbs(self):
         list_serializers = {
-                'get':self.list_serializer, 
-                'post':self.create_serializer
+                u'get':self.list_serializer, 
+                u'post':self.create_serializer
             }
         return list_serializers
 
@@ -32,18 +32,18 @@ class ListCreateViewset(GenericViewSet,
             list_serializers = self.make_serializers_list_by_http_verbs()
             serializer = list_serializers[http_verb.lower()]
         except KeyError:
-            raise SuspiciousOperation('attemt http verb denied !')
+            raise SuspiciousOperation(_(u'attemt http verb denied !'))
         return serializer
 
 
 class TransactionsViewSet(ListCreateViewset):
     permission_classes = (IsAuthenticated, )
     filter_backends = (DjangoFilterBackend, OrderingFilter)
-    filter_fields = ('name', 'type_transaction')
-    ordering_fields = ('name', 'value') 
+    filter_fields = (u'name', u'type_transaction')
+    ordering_fields = (u'name', u'value') 
     list_serializer = ListTransactionsSerializer
     create_serializer = CreateTransactionSerializer
-    ordering = ('created_at', )
+    ordering = (u'created_at', )
      
     def get_serializer_class(self):
        serializer = self.get_serializer_by_http_verb(self.request.method)

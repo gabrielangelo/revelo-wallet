@@ -6,28 +6,27 @@ from ..models import Transaction, Wallet
 class ListTransactionsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
-        fields = ('name', 'value')
+        fields = (u'name', u'value')
 
     def to_representation(self, obj):
         return {
-            "name": obj.name, 
-            "value": obj.presentation_value, 
+            u'name': obj.name, 
+            u'value': obj.presentation_value, 
         }
 
 
 class CreateTransactionSerializer(serializers.ModelSerializer):
+    currency = serializers.CharField(required=False)
+    
     class Meta:
         model = Transaction
-        fields = ('name', 'type_transaction', 'value')
-
-    def validate(self, data):
-        value = data.get('value', None)
-        if value < 0:
-            raise serializers.ValidationError('value must be positive !')
-        return data
+        fields = (u'name', u'type_transaction', u'value', u'currency')
 
     def create(self, validated_data):
         request = self.context.get('request')
         wallet = request.user.wallet
-        transaction = self.Meta.model.objects.create(**validated_data, wallet=wallet)
+        try:
+            transaction = self.Meta.model.objects.create(**validated_data, wallet=wallet)
+        except Exception as exc:
+            raise serializers.ValidationError(dict(exc))
         return transaction
