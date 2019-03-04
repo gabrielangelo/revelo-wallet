@@ -19,9 +19,7 @@
 
 ### Installing
 
-1. Create an .env file and set variables. Examples can be found in `local.env`.
-
-2. Create a virtual environment:
+1. Create a virtual environment:
 
 ```
 $ virtualenv <env_name>
@@ -29,24 +27,24 @@ $ source <env_name>/bin/activate
 
 
 ```
-3. Set PROJECT var in Makefile to your virtualenv name (<env_name> above), after this, set VENV var to directory name of your virtualenv:
+2. Set PROJECT var in Makefile to your virtualenv name (<env_name> above), after this, set VENV var with the directory name of your virtualenv:
 ```
 PROJECT := <env_name>
 VENV := ~/.virtualenvs 
 ```
-4. Installation:
+3. Installation:
 
 ```
 $ make setup
 ```
 
-5. Start the server:
+4. Start the server:
 
 ```
 $ make run
 ```
 
-The site will be available on <http://127.0.0.1:8000>.
+The site will be available on <http://localhost:8000>.
 
 
 ## REST API Docs
@@ -60,17 +58,17 @@ To deploy to heroku:
 
 1. Create a project in Heroku
 2. Add a Postgres database
-3. Set environment variables
+3. Set environment variables at .env file
 4. Push to the Heroku repository:
 
 ```
 $ git push heroku master
 ```
 
-5. Run migrations:
+5. Run migrations and populate database:
 
 ```
-$ heroku run python manage.py migrate
+$ heroku run python manage.py migrate && python manage.py populate_db
 ```
 
 ## Authors
