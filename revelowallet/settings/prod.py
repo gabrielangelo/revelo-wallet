@@ -18,11 +18,13 @@ if exists(env_file):
     db_from_env = dj_database_url.config(default=env('DATABASE_URL'))
     
     DATABASES['default'].update(db_from_env)
-
+    DEBUG = env('DEBUG', cast=bool)
     SECRET_KEY = env('SECRET_KEY')
 
     ALLOWED_HOSTS = env('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')])
-     
+    
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
     
     MIDDLEWARE += [
