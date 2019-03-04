@@ -3,7 +3,7 @@ from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 
 from transactions.models import Transaction
-from utils import print_green
+from core.utils import print_green
 
 class Command(BaseCommand):
     params_user = {
