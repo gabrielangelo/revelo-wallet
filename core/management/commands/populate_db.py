@@ -3,7 +3,7 @@ from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 
 from transactions.models import Transaction
-
+from utils import print_green
 
 class Command(BaseCommand):
     params_user = {
@@ -12,10 +12,6 @@ class Command(BaseCommand):
         'password':'celero2018', 
         'is_superuser':True
     }
-    
-    def _print_green(self, name):
-        """grenn letter"""
-        print("\033[92m {}\033[00m".format(name))
 
     def create_user(self):
         user, created  = User.objects.get_or_create(**self.params_user)
@@ -41,7 +37,8 @@ class Command(BaseCommand):
     
     def _initial_handle(self): 
         self.create_transactions(self.create_user())
-        self._print_green('Ok')
+        print('populating db...')
+        print_green('Ok')
         
     def handle(self, **options):
         self._initial_handle()
