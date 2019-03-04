@@ -17,7 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url
 from rest_framework_swagger.views import get_swagger_view   
+
 from routers import router_v1
+from core.views import redirect_view
 
 schema_view = get_swagger_view(title='Celero API')
 
@@ -25,7 +27,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     
     path('api/v1/', include(router_v1.urls)),
+        
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     
-    url('docs/', schema_view),
+    url(r'^$', redirect_view),
+    
+    path('api/v1/docs/', schema_view),
 ]
