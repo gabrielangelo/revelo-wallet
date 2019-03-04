@@ -16,19 +16,26 @@ env_file = join(dirname(__file__), '.env')
 if exists(env_file):
     environ.Env.read_env(str(env_file))
     db_from_env = dj_database_url.config(default=env('DATABASE_URL'))
-    
+
     DATABASES['default'].update(db_from_env)
+    
     DEBUG = env('DEBUG', cast=bool)
+
     SECRET_KEY = env('SECRET_KEY')
 
     ALLOWED_HOSTS = env('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')])
     
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, 'static'),
+    )
+
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
     
     MIDDLEWARE += [
-        'django.middleware.security.SecurityMiddleware'
+        'django.middleware.security.SecurityMiddleware', 
+        'whitenoise.middleware.WhiteNoiseMiddleware'
     ]
     
     print_shadow_green('app running with production config')
