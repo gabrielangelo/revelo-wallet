@@ -8,16 +8,18 @@ from core.utils import print_green
 class Command(BaseCommand):
     params_user = {
         'username':'celero',
-        'email':'admin@celero.com.br', 
-        'password':'celero2018', 
-        'is_superuser':True
+        'email':'admin@celero.com.br',
+        'is_superuser':True, 
     }
+    password = 'celero2018'
 
     def create_user(self):
         user, created  = User.objects.get_or_create(**self.params_user)
-        if created:
+        if not created:
             Transaction.objects.filter(wallet__user=user).delete()
             return user 
+        user.set_password(self.password)
+        user.save()
         return user 
     
     def create_transactions(self, user):
