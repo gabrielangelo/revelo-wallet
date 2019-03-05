@@ -44,7 +44,8 @@ setup:
 	$(MANAGE) migrate
 	$(MANAGE_TEST)
 	$(MANAGE) populate_db
-	$(MANAGE) collectstatic
+	$(MANAGE) collectstatic --noinput
+
 pop_db:
 	$(MANAGE) populate_db
 
@@ -59,4 +60,14 @@ install_prod_deps:
 
 help:
 	grep '^[^#[:space:]].*:' Makefile | awk -F ":" '{print $$1}'
+init-docker-app:
+	@docker-compose up -d --build
+	@docker-compose run web python /code/manage.py migrate --noinput
+	@docker-compose run web python /code/manage.py test
+	@docker-compose run web python /code/manage.py populate_db
+	@docker-compose run web python /code/manage.py collectstatic --noinput
 
+up_container:
+	@docker-compose up -d
+down_container:
+	@docker-compose down

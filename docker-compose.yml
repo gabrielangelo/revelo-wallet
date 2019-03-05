@@ -1,0 +1,23 @@
+version: '3.3'
+
+services:
+  # Postgres
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=admin_local
+      - POSTGRES_PASSWORD=local_test
+      - POSTGRES_DB=celero_local
+      - POSTGRES_HOST=db
+    
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/webapps
+    ports:
+      - "8000:8000"
+    links:
+      - db
+    depends_on:
+      - db

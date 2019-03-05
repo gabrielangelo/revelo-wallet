@@ -95,8 +95,8 @@ DATABASES = {
         'NAME': 'celero_local',
         'USER': 'admin_local',
         'PASSWORD': 'local_test',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'HOST': 'db',
+        'PORT': 5432,
     }
 }
 
