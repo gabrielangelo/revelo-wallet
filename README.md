@@ -32,13 +32,16 @@ $ source <env_name>/bin/activate
 PROJECT := <env_name>
 VENV := ~/.virtualenvs 
 ```
-3. Installation:
+
+3. Set database configuration using this tutorial  https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-ubuntu-16-04
+
+4. Installation:
 
 ```
 $ make setup
 ```
 
-4. Start the server:
+5. Start the server:
 
 ```
 $ make run
