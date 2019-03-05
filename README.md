@@ -27,7 +27,7 @@ $ source <env_name>/bin/activate
 
 
 ```
-2. Set PROJECT var in Makefile to your virtualenv name (<env_name> above), after this, set VENV var with the directory name of your virtualenv:
+2. Set PROJECT var in Makefile to your virtualenv name (<env_name> above), after this, set VENV var with the directory name that contains your virtualenv directory, for example, if your virtualenv is in the .virtualenvs directory, then:
 ```
 PROJECT := <env_name>
 VENV := ~/.virtualenvs 
