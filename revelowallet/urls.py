@@ -25,12 +25,9 @@ schema_view = get_swagger_view(title='Celero API')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    
-    path('api/v1/', include(router_v1.urls)),
-        
+    path('api/v1/', include(router_v1.urls)),    
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    
     url(r'^$', redirect_view),
-    
+    path(r'api/v1/auth', include('auth.api.urls')),
     path('api/v1/docs/', schema_view),
 ]
