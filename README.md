@@ -44,6 +44,17 @@ $ make setup
 $ make run
 ```
 
+## Using docker
+1. set DATABASES 'HOST' value in revelowallet/settings/local.py file to 'db'
+2.Run:
+```
+$ make init-docker-app
+$ make up_container
+```
+3. To close down the Docker container:
+```
+$ make down_container
+```
 The site will be available on <http://localhost:8000>.
 
 
