@@ -84,6 +84,12 @@ $ git push heroku master
 ```
 $ heroku run python manage.py migrate && python manage.py populate_db
 ```
+6. To use JWT uthentication, you can run the following commands:
+```
+$ curl -X POST "https://url/api/v1/authobtain-token" -H "accept: application/json" -H "Content-Type: application/json" -H "X-CSRFToken: JOpNCTi3MD5kajHxz3aOMtVMZ15o9qH3nLZDqcDUnOVvCZjd927v8WajwBwkscCL" -d "{ \"username\": \"admin@celero.com.br\", \"password\": \"celero2018\"}"
+$ curl -X curl -H "Authorization: JWT <user_token>" https://url/api/v1/transactions
+
+```
 ## Heroku Address 
 The application deploy address: http://celero-wallet.herokuapp.com/
 ## Authors
