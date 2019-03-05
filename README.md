@@ -1,4 +1,4 @@
-# Cerelo wallet
+# Celero wallet
 
 ## Main tools used in this project
 
