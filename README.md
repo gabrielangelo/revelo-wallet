@@ -45,8 +45,8 @@ $ make run
 ```
 
 ## Using docker
-1. set DATABASES 'HOST' value in revelowallet/settings/local.py file to 'db'
-2.Run:
+1. set DATABASES 'HOST' value in revelowallet/settings/local.py file to 'db' 
+2. Run:
 ```
 $ make init-docker-app
 $ make up_container
